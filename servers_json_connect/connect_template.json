@@ -1,0 +1,39 @@
+# optionally use this file to define connection settings for sets of servers.
+# --> it will then be available for use across all blocks.
+# --> the alternative is to define the connection settings in the block's json (inline).
+# [1] duplicate this file and rename it suitably.
+#     --> e.g. cluster_acme_preprod.json.
+# [2] for each server in a set, define a connection settings json block.
+#     --> remote user account and the key location to use to connect.
+#     --> the targetFolder where a bash-blocks folder containing the framework and its blocks will be created.
+#     --> the installFolder where blocks will be installed into.
+#     --> note that by default the installFolder is conveniently located inside the targetFolder.
+#     --> note that certain optional variables used in the paths below are resolved at runtime (connect_targetFolder + build_block + build_buildFolder).
+# [3] delete these instructions, leaving only json in thie file.
+# [4] reference this file in the build settings of the json definition for the block that is being run.
+#     --> i.e. build connectJson setting is the name given to this duplicated file.
+# [5] ensure the order of the servers matches in this file and the block's json definition file.
+{
+  "servers":{
+    "server1":{
+      "connect":{
+        "tag":            "node1",
+        "pubIp":          "127.0.0.1",
+        "sshUser":        "USER",
+        "sshKeyLocal":    "/Users/USER/.ssh/id_rsa",
+        "targetFolder":   "/Users/USER/Desktop/",
+        "installFolder":  "${connect_targetFolder}bash-blocks/installed-blocks/${build_block}/${build_buildFolder}/"
+      }
+    },
+    "server2":{
+      "connect":{
+        "tag":            "node2",
+        "pubIp":          "127.0.0.2",
+        "sshUser":        "USER",
+        "sshKeyLocal":    "/Users/USER/.ssh/id_rsa",
+        "targetFolder":   "/Users/USER/Desktop/",
+        "installFolder":  "${connect_targetFolder}bash-blocks/installed-blocks/${build_block}/${build_buildFolder}/"
+      }
+    }
+  }
+}

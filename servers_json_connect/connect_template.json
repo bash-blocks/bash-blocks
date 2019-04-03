@@ -3,7 +3,7 @@
 # --> the alternative is to define the connection settings in the block's json (inline).
 # [1] duplicate this file and rename it suitably.
 #     --> e.g. cluster_acme_preprod.json.
-# [2] for each server in a set, define a connection settings json block.
+# [2] in this duplicated file, for each server in a set, define a connection settings json block.
 #     --> a tag used to identify the server.
 #     --> the ip that the machine canbe connected to over ssh.
 #     --> the remote user account to connect to.
@@ -14,9 +14,9 @@
 #     ----> the variables used in the paths below that are resolved at runtime.
 #     -------> only the use of connect_targetFolder is optional.
 # [3] reference this file in the build settings of the json definition for the block that is being run.
-#     --> i.e. assign the new name of this file to the build connectJson setting.
+#     --> i.e. assign the new name of this duplicated file to the build connectJson setting.
 # [4] ensure matching order for the servers in this file and the block's json definition file.
-# [5] finally in the duplicated file delete these instructions leaving only the json.
+# [5] finally in this duplicated file delete these instructions leaving only the json.
 {
   "servers":{
     "server1":{

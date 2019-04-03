@@ -9,10 +9,10 @@
 #     --> the installFolder where blocks will be installed into.
 #     --> note that by default the installFolder is conveniently located inside the targetFolder.
 #     --> note that certain optional variables used in the paths below are resolved at runtime (connect_targetFolder + build_block + build_buildFolder).
-# [3] delete these instructions, leaving only json in thie file.
-# [4] reference this file in the build settings of the json definition for the block that is being run.
+# [3] reference this file in the build settings of the json definition for the block that is being run.
 #     --> i.e. build connectJson setting is the name given to this duplicated file.
-# [5] ensure the order of the servers matches in this file and the block's json definition file.
+# [4] ensure the order of the servers matches in this file and the block's json definition file.
+# [5] delete these instructions, leaving only json in thie file.
 {
   "servers":{
     "server1":{

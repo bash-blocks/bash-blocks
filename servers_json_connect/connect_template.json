@@ -1,18 +1,23 @@
 # optionally use this file to define connection settings for sets of servers.
-# --> it will then be available for use across all blocks.
+# to use it reference it in the json defintion file of the block being run.
+# --> it will then be available for use by any block.
 # --> the alternative is to define the connection settings in the block's json (inline).
 # [1] duplicate this file and rename it suitably.
 #     --> e.g. cluster_acme_preprod.json.
 # [2] for each server in a set, define a connection settings json block.
-#     --> remote user account and the key location to use to connect.
+#     --> a tag used to identify the server.
+#     --> the ip that the machine canbe connected to over ssh.
+#     --> the remote user account to connect to.
+#     --> the local key location to use to connect.
 #     --> the targetFolder where a bash-blocks folder containing the framework and its blocks will be created.
-#     --> the installFolder where blocks will be installed into.
-#     --> note that by default the installFolder is conveniently located inside the targetFolder.
-#     --> note that certain optional variables used in the paths below are resolved at runtime (connect_targetFolder + build_block + build_buildFolder).
+#     --> the installFolder where the block being run will use to install into.
+#     ----> by default the installFolder is conveniently located inside the targetFolder.
+#     ----> the variables used in the paths below that are resolved at runtime.
+#     -------> only the use of connect_targetFolder is optional.
 # [3] reference this file in the build settings of the json definition for the block that is being run.
-#     --> i.e. build connectJson setting is the name given to this duplicated file.
-# [4] ensure the order of the servers matches in this file and the block's json definition file.
-# [5] delete these instructions, leaving only json in thie file.
+#     --> i.e. assign the new name of this file to the build connectJson setting.
+# [4] ensure matching order for the servers in this file and the block's json definition file.
+# [5] finally in the duplicated file delete these instructions leaving only the json.
 {
   "servers":{
     "server1":{

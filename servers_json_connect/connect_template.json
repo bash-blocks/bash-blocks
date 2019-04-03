@@ -1,5 +1,4 @@
 # optionally use this file to define connection settings for sets of servers.
-# to use it reference it in the json defintion file of the block being run.
 # --> it will then be available for use by any block.
 # --> the alternative is to define the connection settings in the block's json (inline).
 # [1] duplicate this file and rename it suitably.

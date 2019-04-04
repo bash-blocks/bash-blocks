@@ -1,0 +1,200 @@
+INSTRUCTIONS:
+
+[1] copy this template and suitably rename it. remember to rename the file extension to .json
+--> e.g. dse-6.7.0_acme_preprod.json
+[2] move it to the folder blocks/dse-7.0/servers/
+[3] remove all the instructions + comments from the copied template, leaving just the json notation.
+[4] edit the json value keys for your dse cluster setup.
+================================================
+==> build section (mandatory):
+
+connect_json:
++ specify a json server definition file from the folder: bash-blocks/servers/
++ the advantage of this approach is you can re-use these connection settings across other blocks.
++ or leave empty and include the connect block within each servers defintion (as done below).
+
+block:
++ the name of this block.
++ --> dse-6.7
+
+buildFolder:
++ the choosen build folder to use.
++ this facilitates different setups for different clusters, clients, versions, settings etc.
++ e.g. dse-6.7.0_acme_preprod or dse-6.7.0_bash-blocks-corporation_prod
+
+versionDse:
++ the dse software version to use.
++ the prefix of the tarball filename.
++ e.g. dse-6.7.0
+
+tarballDse:
++ the tarball to use.
++ e.g. dse-6.7.0-bin.tar.gz
+
+clusterName:
++ the name of the cluster as will be defined in the cassandra.yaml
++ e.g. dse-6.7.0_acme_preprod
+
+endpointSnitch:
++ the snitch to use as will be defined in the cassandra.yaml
++ e.g. GossipingPropertyFileSnitch
+
+vnodes:
++ the number of vnodes
++ e.g. 8 or 16
++ if manually assigning tokens (the old way!) - then leave this blank and fill in the token value for each server in the server settings as outlined below.
+================================================
+==> servers section (mandatory):
+
++ specify at least one server!
++ if specifying in the above build section, a servers connection defintion json file from bash-blocks/servers/
++ ...then no need to include the connect block as seen below
++ ... but ensure referenced servers file has same number of servers as defined here!
++ ensure server json blocks each have a unique identifier with convention..
+--> 'server1','server2', 'server3' ...
++ for paths defined within the servers block (not build)- optionally use the variables ${connect_installFolder}, ${connect_targetFolder},${build_buildFolder} and ${build_block} as part of paths.
++ these variables will be resolved at run-time.
+
+connect:
+--> tag:                     for this block used only in display messages. Here for example, can define the role of the dse node.
+--> pubIp:                   specify what will be used to connect - could be internal 'private ip' if on cloud servers or within vpn!
+--> sshUser:                 ${bbv_os} account to connect to on remote server.
+--> sshKeyLocal:             full path to local copy of private key file used when passwordless authentication was setup (a prerequisite of using bash-blocks).
+--> targetFolder:            location of bash-blocks folder on remote server.
+--> installFolder:           location on remote server of block installation.
+
+dse_mode:
+--> search:                  enable search on this dse node - true or false.
+--> analytics:               enable analytics on this dse node - true or false.
+--> graph:                   enable graph on this dse node - true or false.
+--> dsefs:                   enable dsefs on this dse node - true or false. (auto enabled if analytics is enabled).
+
+cassandra:
+--> listen_address           specify either the ip for nodes to listen on (use private ip on aws).
+--> nativeTransportAddress   normally specify the same ip as listen address.
+--> seeds:                   used at bootstrap of node into cluster
+                             .. take care when choosing the seeds for a node
+                             .. order local DC seeds first, then seeds for any other DC
+                             .. do not include all ip addresses as seeds, but say a quorum from each DC
+--> token:                   specify a calculated token of leave blank to use vnodes
+--> dc:                      the name of the datacenter this node belongs to - e.g. dc1
+--> rack:                    the rack in the data center this node resides on - e.g. rack1
+--> tempFolder:              used by java.
+--> logFolder:               cassandra log folder.
+--> commitlogFolder:         folder for commitlogs (deleted once sstable is created).
+--> hintedhandoffFolder:     folder for storage of hints (when node is down).
+--> savedcachesFolder:       folder for persistent storage of caches.
+--> cdcrawFolder:            change data capture logging per table.
+--> sstableFolders:          the db file store for cassandra.
+
+dsefs:
+--> dsefs1:                  the identifier for this dsefs mount. can be multiple paths --> 'dsefs1','dsefs2', 'dsefs3' ...
+--> folder:                  the full folder path to the dsefs mount.
+--> storageWeight:           how much data to place in this directory, relative to other directories in the cluster. this soft constraint determines how DSEFS distributes the data. For example, a directory with a value of 3.0 receives about three times more data than a directory with a value of 1.0.
+--> minFreeSpace:            the reserved space, in bytes, to not use for storing file data blocks. default is 5368709.
+
+data:
+--> dataFolder:              folder to store all non sstable data folders - e.g. commitlogs, saved-caches, hinted handoffs. by default this organises these within the installed-blocks folder by build-folder.
+--> logFolder:               folder to store all logs for dse cassandra. by default this organises these within the installed-blocks folder by build-folder.
+--> tempFolder:              location of temp folder. requires read + write privileges of ${bbv_os} user. by default this is within the installed-blocks folder.
+--> sstableFolders:          array to hold one or more full paths to sstabkle mount points.
+
+================================================
+FINALLY:
++ in the copy of this template, delete all these instructions, leaving just the json.
++ two servers are specified below. delete or add server blocks as required.
++ .. remember to leave a comma between server blocks but omit from end of last block.
++ .. take care to remove correct amount of opening/closing brackets if removing server block.
++ .. text editors such as atom will help make this task easier.
+
++ out of the box install paths for a convenient to navigate folder structure:
+
+--> dse install folder:
+          bash-blocks/installed-blocks/dse-6.7/${build_buildFolder}
+--> temp folder:
+          bash-blocks/installed-blocks/dse-6.7/temp/
+--> logs:
+          bash-blocks/installed-blocks/dse-6.7/logs/${build_buildFolder}/
+--> non sstable data folders:
+          bash-blocks/installed-blocks/dse-6.7/data/${build_buildFolder}/
+
++ all the above paths are configurable and you are not bound to this setup.
++ for paths defined within the servers block (not build)- optionally use the variables ${connect_targetFolder},${build_buildFolder} and ${build_block} as part of paths.
+================================================
+{
+  "build":{
+    "connectJson":                 "",
+    "block":                       "dse-6.0",
+    "buildFolder":                 "dse-6.0.4_acme",
+    "versionDse":                  "dse-6.0.4",
+    "tarballDse":                  "dse-6.0.4-bin.tar.gz",
+    "clusterName":                 "dse-6.0.4_acme",
+    "endpointSnitch":              "GossipingPropertyFileSnitch",
+    "vnodes":                      "8"
+  },
+  "servers":{
+    "server1":{
+      "connect":{
+        "tag":                     "storage_1",
+        "pubIp":                   "127.0.0.1",
+        "sshUser":                 "jondowson",
+        "sshKeyLocal":             "/Users/jondowson/.ssh/id_rsa",
+        "targetFolder":            "/Users/jondowson/Desktop/",
+        "installFolder":           "${connect_targetFolder}bash-blocks/installed-blocks/${build_block}/${build_buildFolder}/"
+      },
+      "dse":{
+        "installFolder":           "${connect_installFolder}${build_versionDse}/",
+        "softwareFolder":          "${connect_targetFolder}bash-blocks/blocks/${build_block}/software/",
+        "mode": {
+          "search":                "false",
+          "analytics":             "false",
+          "graph":                 "false",
+          "dsefs":                 "false"
+        },
+      },
+      "cassandra":{
+        "listenAddress":           "127.0.0.1",
+        "nativeTransportAddress":  "127.0.0.1",
+        "seeds":                   "127.0.0.1",
+        "token":                   "",
+        "dc":                      "dc1",
+        "rack":                    "rack1",
+        "tempFolder":              "${connect_installFolder}temp/cassandra/",
+        "logFolder":               "${connect_installFolder}logs/cassandra/",
+        "commitlogFolder":         "${connect_installFolder}data/commitlog/",
+        "hintedhandoffFolder":     "${connect_installFolder}data/hints/",
+        "savedcachesFolder":       "${connect_installFolder}data/saved_caches/",
+        "cdcrawFolder":            "${connect_installFolder}data/cdc_raw/",
+        "sstableFolders":         ["${connect_installFolder}data/sstables1/",
+                                   "${connect_installFolder}data/sstables2/"]
+      },
+      "spark":{
+        "masterlogFolder":         "${connect_installFolder}logs/spark/master/",
+        "workerlogFolder":         "${connect_installFolder}logs/spark/worker/",
+        "localdataFolder":         "${connect_installFolder}data/spark/rdd/",
+        "executorFolder":          "${connect_installFolder}data/spark/rdd/",
+        "workerdataFolder":        "${connect_installFolder}data/spark/worker/",
+        "alwaysonsqlFolder":       "${connect_installFolder}data/spark/alwayson_sql"
+      },
+      "dsefs":{
+        "workFolder":              "${connect_installFolder}data/dsefs_work/",
+        "dsefs1":{
+          "folder":                "${connect_installFolder}data/dsefs1/",
+          "storageWeight":         "1.0",
+          "minFreeSpace":          "5368709"
+        },
+        "dsefs2":{
+          "folder":                "${connect_installFolder}data/dsefs2/",
+          "storageWeight":         "1.0",
+          "minFreeSpace":          "5368709"
+        }
+      },
+      "gremlin":{
+        "logFolder":               "${connect_installFolder}logs/gremlin/"
+      },
+      "tomcat":{
+        "logFolder":               "${connect_installFolder}logs/tomcat/"
+      }
+    }
+  }
+}

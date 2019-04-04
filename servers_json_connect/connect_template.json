@@ -1,6 +1,6 @@
 # optionally use this file to define connection settings for sets of servers.
 # --> it will then be available for use by any block.
-# --> the alternative is to define the connection settings in the block's json (inline).
+# --> the alternative is to define the connection settings in the block's json defintion (inline).
 # [1] duplicate this file and rename it suitably.
 #     --> e.g. cluster_acme_preprod.json.
 # [2] in this duplicated file, for each server in a set, define a connection settings json block.

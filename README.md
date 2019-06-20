@@ -20,7 +20,8 @@ Influenced by javascript frameworks, **bb** has the portability of **JQuery** co
 * it is tested on Mac, Ubuntu, Centos and Redhat.  
 * it has no installed dependencies requiring only a bash version greater than 4.0 (now standard across enterprise).**<sup>1</sup>**         
 
-**<sup>1</sup>** *The json parsing library **jq** is provided and like **bb** can be copy and pasted between terminal windows.*  
+**<sup>note 1</sup>**     
+--> *The json parsing library **jq** is provided and like **bb** can be copy and pasted between terminal windows.*  
 
 ### Stages, tasks and actions
 
@@ -39,10 +40,11 @@ Depending on the **block** being run (i.e. dictated by its developer), either al
 * **Stages 1 and 7** only execute on the machine running **bb**.  
 * **Stages 2 to 6** are performed asynchronously against each remote server in parallel.
 
-**<sup>2</sup>** *This optional stage could utilise the pre-built 'make build folder' stage and / or utilise a **block** specific set of **tasks**.    
-The 'make build folder' stage provides a way of creating a versioned folder of resources against a given json definition file.    
---> see **block-dse-6.7.x** as an example of how this helps to version segregate different settings for a dse deployment.*      
---> https://github.com/bash-blocks/block-dse-6.7.x
+**<sup>note 2</sup>**     
+--> *This optional stage could utilise the pre-built 'make build folder' stage and / or utilise a **block** specific set of **tasks***.    
+--> *The 'make build folder' stage provides a way of creating a versioned folder of resources for a json definition file.*   
+--> *See **block-dse-6.7.x** as an example of how this helps to version segregate different settings for a dse deployment.*      
+----> https://github.com/bash-blocks/block-dse-6.7.x
 
 ### Block development
 

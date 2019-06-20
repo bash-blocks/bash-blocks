@@ -71,8 +71,9 @@ $ ./bb --help                                  # display the help screen
 $ ./bb --install-block bb                      # install bb locally and follow on-screen instructions
 ```
 
-The install will:  
-1. Create a local folder structure in the same directory as **bb**.    
+**The install will:**
+
+1. .. create a local folder structure in the same directory as **bb**.    
 ```
 --bash-blocks    
 ----bb
@@ -81,11 +82,11 @@ The install will:
 ----installed-blocks
 ----servers_json_connect
 ```
-2. Add an entry to the bash_profile (+ bashrc on Ubuntu systems), so **bb** can be run from any folder.  
+2. .. add an entry to the bash_profile (+ bashrc on Ubuntu systems), so **bb** can be run from any folder.  
 
 ![alt text](https://github.com/jondowson/bash-blocks-logo/blob/master/Screenshot%202019-06-19%20at%2022.06.14.png?raw=true ".bash_profile")
 
-3. On a Mac install/refresh 'homebrew' package manager and retrieve a number of packages.    
+3. .. and on a **Mac** it installs/refreshes the 'homebrew' package manager and installs some packages.    
 
 ### Password-less server access           
 
@@ -102,7 +103,7 @@ cat ~/.ssh/id_rsa.pub | ssh <user>@<hostname> 'umask 0077; mkdir -p .ssh; cat >>
 ```
 ### Install a block
 
-Once you have sourced your bash profile to apply the path settings, you can run bb directly from any folder.
+Once you have sourced your bash profile to apply the path settings, you can run **bb** directly from any folder.
 
 ```bash
 $ bb --install-block block-abc   # install this block from the bash-blocks github repo.

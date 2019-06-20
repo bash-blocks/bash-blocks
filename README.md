@@ -14,7 +14,8 @@ The master branch is in sync with the latest stable version.
 It is written in bash because sometimes thats all you can use in locked down environments (banking).  
 Influenced by javascript frameworks, **bb** has the portability of **JQuery** combined with the extensibility of **NodeJs**.       
 * it is a single minimised bash file that may be copy and pasted between terminal windows.  
-* modules of functionality (**blocks**) are easily installed with either the **bb** package manager or copy and pasting.  
+* modules of functionality (**blocks**) are easily installed with either the **bb** package manager or copy and pasting.    
+* it does not require elevated permissions to be run.      
 * via json the end-users have a simple declarative approach to defining server and meta data for a given **block**.   
 * it is developer friendly and offers rapid application development for any scriptable task to become a **block**.   
 * it is tested on Mac, Ubuntu, Centos and Redhat.  
@@ -22,6 +23,7 @@ Influenced by javascript frameworks, **bb** has the portability of **JQuery** co
 
 **<sup>note 1</sup>**     
 --> *The json parsing library **jq** is provided and like **bb** can be copy and pasted between terminal windows.*  
+--> *On a Mac (i.e. development laptops) elevated user rights and the homebrew package manager are required.*  
 
 ### Stages, tasks and actions
 

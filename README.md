@@ -56,8 +56,12 @@ The 'make build folder' stage provides a way of creating a versioned folder of r
 
 ### Install bb
 
+The git clone and download zip (from github) commands will create a 'bash-blocks' parent folder.    
+If copy and pasting files, first create this parent folder.   
+
+
 ```bash
-$ git clone https://github.com/bash-blocks.git # or manually download files into a folder called 'bash-blocks'
+$ git clone https://github.com/bash-blocks.git # or download zip or copy and paste bb + jq files
 $ chmod +x bb                                  # make bb executable
 $ ./bb --help                                  # display the help screen
 $ ./bb --install-block bb                      # install bb locally and follow on-screen instructions
@@ -86,7 +90,7 @@ The install will:
 ```bash
 $ ssh-keygen -t rsa                # do this if a local key does not already exist + hit enter to all questions.    
 $ ssh-copy-id user@127.0.0.1       # copy the public key to the local server.       
-$ ssh-copy-id user@remote-machine  # copy the public key to the remote server.
+$ ssh-copy-id user@remote-machine  # copy the public key to any remote server specified in a json definition.
 ```
 Alternatively use this command if ssh-copy-id is not available.   
 ```bash
@@ -101,7 +105,7 @@ $ bb --install-block block-abc   # install this block from the bash-blocks githu
 ```
 
 Alternatively download (or copy and paste) the block from another destination and add it to the **blocks** subfolder.    
-Then follow the block's README instructions to install it manually.  
+Then run the above --install-block command.  
 
 ## Help
 

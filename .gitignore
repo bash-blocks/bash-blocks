@@ -1,0 +1,6 @@
+.DS_Store
+blocks
+installed-blocks
+tmp
+.git
+servers_json_connect
